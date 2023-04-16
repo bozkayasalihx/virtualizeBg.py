@@ -1,8 +1,8 @@
 import cv2 as cv
 import os
-from segmentor import Selfie_segmentation
+from segmentor import FaceSegmentation
 
-capture = cv.VideoCapture("./videos/test.mp4")
+capture = cv.VideoCapture("./videos/woman.mp4")
 dir = "./background"
 backgrounds = []
 for i in os.listdir(dir):
@@ -10,7 +10,7 @@ for i in os.listdir(dir):
 
 background = backgrounds[0]
 
-virtualBG = Selfie_segmentation()
+virtualBG = FaceSegmentation()
 
 HEIGHT = 150
 WIDTH = 150
@@ -23,7 +23,6 @@ while True:
         h =  HEIGHT+frame.shape[1]
         w =  WIDTH+frame.shape[0]
         corped_bg = bg[HEIGHT:h, WIDTH:w]
-        print(corped_bg.shape)
         frame = cv.resize(frame, (corped_bg.shape[1], corped_bg.shape[0]))
         outframe = virtualBG.remove_bg(frame, BGimg=corped_bg, threshold=0.8, blur=(3, 3))
         cv.imshow("New Background", outframe)
