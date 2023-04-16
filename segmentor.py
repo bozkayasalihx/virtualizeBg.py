@@ -12,7 +12,7 @@ class Selfie_segmentation():
 
         self.Selfie_Segmentation = self.mp_selfie_Segmentation.SelfieSegmentation(self.model)
 
-    def Bg_Remover(self, frame, BGimg = (255,255,255), threshold = 0.1, blur=(7,7), invisible = False, frametemp = None):
+    def remove_bg(self, frame, BGimg = (255,255,255), threshold = 0.1, blur=(7,7), invisible = False, frametemp = None):
         frame = cv.cvtColor( cv.flip(frame,1), cv.COLOR_BGR2RGB)
         frame.flags.writeable = False
 
