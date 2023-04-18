@@ -3,7 +3,6 @@ import numpy as np
 import mediapipe as mp
 
 class FaceSegmentation():
-
     def __init__(self,model = 1): 
         self.model = model
         self.mpDraw = mp.solutions.drawing_utils
@@ -17,7 +16,7 @@ class FaceSegmentation():
         frame.flags.writeable = False
 
         results = self.Selfie_Segmentation.process(frame)
-
+        ##NOTE: replace new image with the new one 
         frame.flags.writeable = True
         frame = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
 
