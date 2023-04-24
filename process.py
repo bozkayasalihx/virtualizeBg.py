@@ -1,7 +1,6 @@
 import cv2 as cv
 import os
 from segmentor import FaceSegmentation
-import ffmpeg 
 
 greenCapture = cv.VideoCapture("./videos/green.mp4")
 backCapture = cv.VideoCapture("./videos/background.mp4")
@@ -13,45 +12,44 @@ for i in os.listdir(dir):
 background = cv.imread("./background/" + "back.jpg")
 virtualBG = FaceSegmentation()
 
-HEIGHT = 150
-WIDTH = 150
+HEIGHT = 300
+WIDTH = 300
 
-fourcc = cv.VideoWriter_fourcc(*'MJPG')
-output = cv.VideoWriter(
-    "output.avi", cv.VideoWriter_fourcc(*'MPEG'), 30, (1080, 1920))
+fourcc = cv.VideoWriter_fourcc(*'mp4v')
+out = cv.VideoWriter('output.mp4', fourcc, 30.0, (WIDTH,  HEIGHT))
 
+print("processing..")
+while greenCapture.isOpened() and backCapture.isOpened():
+    gRet, greenFrame = greenCapture.read()
+    bRet, backFrame = backCapture.read()
 
-curIndex = 0
-
-while True:
-    _, greenFrame = greenCapture.read()
-    _, backFrame = backCapture.read()
+    if not gRet or not bRet:
+        break
     greenFrame = cv.GaussianBlur(greenFrame, (3, 3), 0)
     backFrame = cv.GaussianBlur(backFrame, (3, 3), 0)
+
     try:
-        greenFrame = cv.resize(greenFrame, (300, 300))
+        greenFrame = cv.resize(greenFrame, (WIDTH, HEIGHT))
         corped_bg = backFrame[0:WIDTH, 0:HEIGHT]
+
         (Height, Width) = greenFrame.shape[:2]
-        frame = cv.resize(greenFrame, (corped_bg.shape[0], corped_bg.shape[1]))
+        frame = cv.resize(greenFrame, (WIDTH, HEIGHT))
+
         outframe = virtualBG.remove_bg(
             frame, BGimg=corped_bg, threshold=0.8, blur=(3, 3))
-        
-        ffmpeg.input()
+        out.write(outframe)
 
-
-        # cv.imshow("New Background", outframe)
     except ValueError:
         print("Images not same size")
         print(ValueError)
-        break
     except:
         print("Something else went WRONG!!")
-        break
+    # key = cv.waitKey(20)
+    # if key == ord('q'):
+    #     break
 
-    key = cv.waitKey(20)
-    if key == ord('q'):
-        break
-
+print("processing done..")
 greenCapture.release()
 backCapture.release()
+out.release()
 cv.destroyAllWindows()
