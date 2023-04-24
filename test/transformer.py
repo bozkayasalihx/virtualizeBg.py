@@ -3,7 +3,7 @@ import numpy as np
 
 
 width = 300 
-height = 200
+height = 300 
 
 
 process1 = (
@@ -30,9 +30,6 @@ while True:
         .frombuffer(in_bytes, np.uint8)
         .reshape([height, width, 3])
     )
-
-    # See examples/tensorflow_stream.py:
-    # out_frame = deep_dream.process_frame(in_frame)
 
     process2.stdin.write(
         in_frame
