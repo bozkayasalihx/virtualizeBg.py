@@ -1,4 +1,5 @@
-ffmpeg 
+ffpmeg-python
 mediapipe 
 numpy
 opencv-python
+moviepy

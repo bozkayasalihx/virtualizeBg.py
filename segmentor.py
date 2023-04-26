@@ -16,7 +16,6 @@ class FaceSegmentation():
         frame.flags.writeable = False
 
         results = self.Selfie_Segmentation.process(frame)
-        ##NOTE: replace new image with the new one 
         frame.flags.writeable = True
         frame = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
 
