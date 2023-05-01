@@ -5,6 +5,7 @@ import os
 import tempfile
 import shutil
 import subprocess
+import argparse
 
 
 class Processor(FaceSegmentation):
@@ -74,8 +75,8 @@ class Processor(FaceSegmentation):
             if not gRet or not bRet:
                 break
             foreFrame = cv.GaussianBlur(foreFrame, (3, 3), 0)
-            backFrame = cv.GaussianBlur(backFrame, (3, 3), 0)
 
+            backFrame = cv.GaussianBlur(backFrame, (3, 3), 0)
             try:
                 foreFrame = cv.resize(foreFrame, (self.w, self.h))
                 roi = backFrame[self.x:self.x + self.w, self.y: self.y+self.h]
@@ -99,7 +100,10 @@ class Processor(FaceSegmentation):
 
 
 if __name__ == "__main__":
-    foreInput = "./videos/green.mp4"
-    backInput = "./videos/background.mp4"
-    processor = Processor(foreground=foreInput, background=backInput)
+    description = "It eliminates backgrounds from videos and can be utilized in other applications as well."
+    parser = argparse.ArgumentParser(prog="pyvirtualbackground", description=description, epilog="text at the bottom of file")
+    parser.add_argument("-fore", "--inputfile")
+    parser.add_argument("-back", "--backgroundfile")
+    args = parser.parse_args()
+    processor = Processor(foreground=args.inputfile, background=args.backgroundfile)
     processor.process()
