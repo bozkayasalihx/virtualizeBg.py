@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "virtualbackground_bozkayasalihx"
+version = "1.0.0"
+authors = [
+  { name="Salih Bozkaya", email="bozkayasalih01x@gmail.com" },
+]
+description = "PyVirtualBackground is a Python script that eliminates the background from a video and replaces it with another video. This can be utilized in various applications, such as video editing or virtual conferencing."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+license = {file = "LICENSE"}
+keywords = ["remove background", "virtual background", "mediapipe", "opencv", "face segmentation", "zoom virtual background"]
+
+[project.urls]
+"Homepage" = "https://github.com/bozkayasalihx/pyvirtualizebackground"
