@@ -19,4 +19,3 @@ Install the required packages using pip:
 ```
 
 ##### Replace `<input_video_file>` with the path to the video file you want to process, and `<background_video_file>` with the path to the video you want to use as the new background.
-
