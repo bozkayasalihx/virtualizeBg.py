@@ -2,7 +2,7 @@
 
 PyVirtualBackground is a Python script that eliminates the background from a video and replaces it with another video. This can be utilized in various applications, such as video editing or virtual conferencing.
 
-![Usage Video](https://github.com/bozkayasalihx/pyvirtualizebackground/raw/main/demo.gif)
+![Usage Video](./demo.gif?raw=true)
 
 
 ### Installation
